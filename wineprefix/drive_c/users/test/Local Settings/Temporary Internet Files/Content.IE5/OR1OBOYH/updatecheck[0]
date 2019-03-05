@@ -1,0 +1,14 @@
+[Release]
+Version=10.1
+
+URL=https://www.heidisql.com/installers/HeidiSQL_10.1.0.5464_Setup.exe
+Revision=5464
+
+Date=2019-01-26
+
+[Build]
+URL=https://www.heidisql.com/builds/heidisql32.r5487.exe
+Revision=5487
+Date=2019-03-02
+Note=(r5487) Issue #553: Add registry hack for enabling (yet ugly) toolbar captions%||%(r5486) Increase height of nodes in VirtualTree's even more, after having done that for #468. Closes #557.%||%(r5485) Issue #548: Revert a line from 651b485af375d53dfed9627ea1dc57777699d055 which lead to loading entire BLOB contents into the grid, instead of the first 256 bytes only.%||%(r5484) Remove semicolon from last case block, so the "else" after it is not counted as a default block. Closes #543%||%(r5483) Remove right anchor from "File" label in grid export dialog. Fixes disappearing label when resizing the dialog.%||%(r5482) Call PQfinish() when PostgreSQL connection failed to initialize. Closes #544.%||%(r5481) Issue #516: Display MemSQL icon and name for those sessions%||%(r5480) Issue #516: Silence error when retrieving unavailable (and non-vital) "Row_format" column from SHOW TABLE STATUS on MemSQL server%||%(r5479) Make column selection dialog more crash safe against clicks between items. Closes #534.%||%(r5478) Issue #496: fix potentially undefined result of TAdoDBQuery.IsNull%||%
+Size=8191543

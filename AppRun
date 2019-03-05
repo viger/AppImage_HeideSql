@@ -1,0 +1,26 @@
+#!/bin/bash
+HERE=$(cd "$(dirname "$0")";pwd)
+export PATH="${HERE}"/usr/bin/:"${PATH}"
+export LD_LIBRARY_PATH="$HERE"/usr/lib:$LD_LIBRARY_PATH
+export XDG_DATA_DIRS="${HERE}"/usr/share/:"${XDG_DATA_DIRS}"
+export GSETTINGS_SCHEMA_DIR="${HERE}"/usr/share/glib-2.0/schemas/:"${GSETTINGS_SCHEMA_DIR}"
+export WINEDEBUG=-all
+
+RO_DATADIR="$HERE/wineprefix/"
+RW_DATADIR="$HOME/.HeidiSql.unionfs"
+
+mkdir -p $RW_DATADIR /tmp/HeidiSql
+
+$HERE/usr/bin/unionfs-fuse -o use_ino,nonempty,uid=$UID -o cow /tmp/HeidiSql=RW:"$RO_DATADIR"=RO "$RW_DATADIR" || exit 1
+
+function finish {
+  echo "Cleaning up"
+  killall $HERE/usr/bin/unionfs-fuse
+}
+trap finish EXIT
+
+export WINEPREFIX="$RW_DATADIR"
+wine "c:\\Program Files\\HeidiSQL\\heidisql.exe" "$@"
+while pgrep "heidisql.exe" > /dev/null ; do sleep 5 ; echo "Waiting A" ; done
+while pgrep "heidisql.exe" > /dev/null ; do sleep 5 ; echo "Waiting B" ; done
+

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=HeidiSql
+Exec=AppRun
+Icon=logo
+Type=Application
+Categories=Network;Development;
